@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cafe Landing Page</title>
+    <title>Cozy Cafe</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -12,69 +12,162 @@
     <header class="site-header">
         <div class="container header-inner">
             <div class="brand">
-                <h1>Cozy Cafe</h1>
+                <span class="brand-mark">☕</span>
+                <div>
+                    <h1>Cozy Cafe</h1>
+                    <p>Good coffee. Great mornings.</p>
+                </div>
             </div>
             <nav>
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
+                <a href="#menu">Menu</a>
                 <a href="#specials">Specials</a>
+                <a href="#testimonials">Reviews</a>
                 <a href="#contact">Contact</a>
             </nav>
+            <button class="nav-button" id="reserveButton">Reserve</button>
         </div>
     </header>
 
     <main>
         <section id="home" class="hero">
-            <div class="container hero-content">
-                <h2>Fresh coffee, quiet mornings, and a warm welcome.</h2>
-                <p>Discover our hand-crafted drinks and tasty pastries in a relaxed space.</p>
-                <button id="reserveButton">Reserve a Table</button>
-            </div>
-        </section>
-
-        <section id="about" class="section-light">
-            <div class="container">
-                <h3>About Us</h3>
-                <p>At Cozy Cafe, we serve small-batch coffee, homemade baked goods, and a friendly atmosphere for every
-                    guest.</p>
-            </div>
-        </section>
-
-        <section id="specials" class="section-dark">
-            <div class="container">
-                <h3>Today’s Specials</h3>
-                <div class="cards">
-                    <article class="card">
-                        <h4>Latte</h4>
-                        <p>Rich espresso, steamed milk, and a hint of vanilla.</p>
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <span class="eyebrow">Welcome to Cozy Cafe</span>
+                    <h2>Warm drinks, fresh pastries, and a calm place to unwind.</h2>
+                    <p>Enjoy handcrafted espresso, signature lattes, and light bites made daily from the best
+                        ingredients.</p>
+                    <div class="hero-actions">
+                        <button id="heroReserveButton">Reserve a Table</button>
+                        <a class="hero-link" href="#menu">See Menu</a>
+                    </div>
+                </div>
+                <div class="hero-highlights">
+                    <article class="highlight-card">
+                        <h4>House Blend</h4>
+                        <p>Our smooth espresso roast with notes of caramel and cherry.</p>
                     </article>
-                    <article class="card">
-                        <h4>Blueberry Muffin</h4>
-                        <p>Fluffy, buttery, and freshly baked each morning.</p>
-                    </article>
-                    <article class="card">
-                        <h4>Herbal Tea</h4>
-                        <p>A calming blend of chamomile and mint.</p>
+                    <article class="highlight-card">
+                        <h4>Fresh Treats</h4>
+                        <p>Warm pastries, seasonal salads, and cozy breakfast bowls.</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="section-light">
+        <section id="about" class="section-surface">
+            <div class="container split-section">
+                <div>
+                    <span class="eyebrow">About Us</span>
+                    <h3>Created for quiet mornings and friendly conversations.</h3>
+                    <p>We believe every cup should feel special. Cozy Cafe blends premium coffee, homemade treats, and a
+                        welcoming space for local neighbors.</p>
+                </div>
+                <div class="feature-list">
+                    <div>
+                        <h4>Seasonal menu</h4>
+                        <p>Fresh ingredients and a rotating selection of seasonal favorites.</p>
+                    </div>
+                    <div>
+                        <h4>Relaxed atmosphere</h4>
+                        <p>Comfortable seating, soft lighting, and warm music all day long.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="section-accent">
             <div class="container">
-                <h3>Contact</h3>
-                <p>Stop by or send us a message to say hello.</p>
-                <address>
-                    123 Main Street<br />
-                    Open daily 7am–5pm
-                </address>
+                <span class="eyebrow">Our Menu</span>
+                <h3>Favorites for every moment.</h3>
+                <div class="cards menu-cards">
+                    <article class="menu-card">
+                        <h4>Signature Latte</h4>
+                        <p>Espresso, steamed milk, and house caramel foam.</p>
+                    </article>
+                    <article class="menu-card">
+                        <h4>Avocado Toast</h4>
+                        <p>Grilled sourdough topped with smashed avocado and chili flakes.</p>
+                    </article>
+                    <article class="menu-card">
+                        <h4>Matcha Chai</h4>
+                        <p>A cozy blend of matcha and warming spices with oat milk.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="specials" class="section-surface">
+            <div class="container">
+                <span class="eyebrow">Today’s Specials</span>
+                <div class="cards specials-grid">
+                    <article class="special-card">
+                        <p class="tag">Drink</p>
+                        <h4>Vanilla Honey Latte</h4>
+                        <p>Bright espresso, steamed milk, and a sweet honey drizzle.</p>
+                    </article>
+                    <article class="special-card">
+                        <p class="tag">Bakery</p>
+                        <h4>Blueberry Scone</h4>
+                        <p>Flaky pastry with juicy berries and lemon glaze.</p>
+                    </article>
+                    <article class="special-card">
+                        <p class="tag">Tea</p>
+                        <h4>Chamomile Spark</h4>
+                        <p>Light herbal tea with orange peel and sparkling water.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section-contrast">
+            <div class="container">
+                <span class="eyebrow">Reviews</span>
+                <h3>What our guests love.</h3>
+                <div class="cards testimonial-grid">
+                    <article class="testimonial-card">
+                        <p>“The coffee is always perfect, and the space feels like a second living room. I love working
+                            here.”</p>
+                        <strong>— Maya R.</strong>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>“The pastries are fresh, the staff is kind, and the latte art is dreamy. A wonderful
+                            neighborhood gem.”</p>
+                        <strong>— James L.</strong>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-surface">
+            <div class="container split-section contact-grid">
+                <div>
+                    <span class="eyebrow">Contact</span>
+                    <h3>Visit us or stay in touch.</h3>
+                    <p>Stop by for a cozy seat, order your coffee to go, or subscribe for monthly updates and specials.
+                    </p>
+                    <address>
+                        123 Main Street<br />
+                        Open daily 7am–5pm
+                    </address>
+                </div>
+                <form id="newsletterForm" class="newsletter-form">
+                    <label for="email">Get updates & special offers</label>
+                    <input id="email" type="email" placeholder="Your email address" required />
+                    <button type="submit">Subscribe</button>
+                </form>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <div class="container">
+        <div class="container footer-inner">
             <p>© 2026 Cozy Cafe</p>
+            <div class="social-links">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+            </div>
         </div>
     </footer>
 
