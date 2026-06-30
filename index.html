@@ -76,7 +76,6 @@
                 </div>
             </div>
         </section>
-
         <section id="menu" class="section-accent">
             <div class="container">
                 <span class="eyebrow">Our Menu</span>
@@ -152,11 +151,20 @@
                         Open daily 7am–5pm
                     </address>
                 </div>
-                <form id="newsletterForm" class="newsletter-form">
-                    <label for="email">Get updates & special offers</label>
-                    <input id="email" type="email" placeholder="Your email address" required />
-                    <button type="submit">Subscribe</button>
-                </form>
+                <div class="contact-widgets">
+                    <form id="newsletterForm" class="newsletter-form">
+                        <label for="email">Get updates & special offers</label>
+                        <input id="email" type="email" placeholder="Your email address" required />
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <form id="contactForm" class="contact-form" action="/api/contact" method="post">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" placeholder="Your name" required />
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us what you'd like" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>

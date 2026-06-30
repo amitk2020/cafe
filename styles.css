@@ -310,18 +310,51 @@ nav a:hover {
   font-weight: 700;
 }
 
-.newsletter-form input {
+.newsletter-form input,
+.contact-form input,
+.contact-form textarea {
   width: 100%;
   padding: 1rem 1.15rem;
   border: 1px solid rgba(42, 35, 31, 0.12);
   border-radius: 999px;
   font-size: 1rem;
+  background: #fff;
 }
 
-.newsletter-form button {
+.newsletter-form textarea,
+.contact-form textarea {
+  min-height: 10rem;
+  border-radius: 1.1rem;
+  resize: vertical;
+}
+
+.newsletter-form button,
+.contact-form button {
   background: var(--primary);
   color: #fff;
   padding: 1rem 1.35rem;
+}
+
+.contact-widgets {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 24px 48px rgba(52, 26, 9, 0.08);
+}
+
+.contact-form label {
+  font-weight: 700;
+}
+
+.contact-form textarea {
+  border-radius: 1rem;
 }
 
 .site-footer {
