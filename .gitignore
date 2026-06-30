@@ -1,8 +1,7 @@
 # Node.js dependencies
 node_modules/
 
-# Wrangler cache and temporary files
-.wrangler/
+
 
 # Local environment files
 .env
