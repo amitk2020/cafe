@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cozy Cafe</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
 <body>
@@ -138,6 +139,16 @@
                 </div>
             </div>
         </section>
+        <section>
+            <form id="contactForm" class="contact-form">
+                <label for="name">Name</label>
+                <input id="name" name="name" placeholder="Your name" required />
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us what you'd like" required></textarea>
+                <div class="cf-turnstile" data-sitekey="YOUR_SITE_KEY"></div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
 
         <section id="contact" class="section-surface">
             <div class="container split-section contact-grid">
@@ -157,13 +168,7 @@
                         <input id="email" type="email" placeholder="Your email address" required />
                         <button type="submit">Subscribe</button>
                     </form>
-                    <form id="contactForm" class="contact-form" action="/api/contact" method="post">
-                        <label for="name">Name</label>
-                        <input id="name" name="name" placeholder="Your name" required />
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Tell us what you'd like" required></textarea>
-                        <button type="submit">Send Message</button>
-                    </form>
+
                 </div>
             </div>
         </section>

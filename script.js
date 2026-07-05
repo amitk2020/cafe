@@ -8,6 +8,7 @@ reserveButtons.forEach((button) => {
     });
 });
 
+// Newsletter form submission
 newsletterForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const email = document.getElementById('email').value.trim();
@@ -21,31 +22,33 @@ newsletterForm.addEventListener('submit', (event) => {
     newsletterForm.reset();
 });
 
+// Contact form submission with Turnstile verification
 contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const name = document.getElementById('name').value.trim();
     const message = document.getElementById('message').value.trim();
+    const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
 
     if (!name || !message) {
         alert('Please enter both your name and a message.');
+        return;
+    }
+    if (!turnstileToken) {
+        alert('Please complete the verification check.');
         return;
     }
 
     try {
         const response = await fetch('/api/contact', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, message })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, message, turnstileToken })
         });
 
-        if (!response.ok) {
-            throw new Error(`Network error: ${response.status}`);
-        }
-
         const result = await response.json();
+        if (!response.ok) throw new Error(result.message || 'Failed to send.');
+
         alert(result.message || 'Message sent successfully!');
         contactForm.reset();
     } catch (error) {
@@ -53,3 +56,5 @@ contactForm.addEventListener('submit', async (event) => {
         alert('Unable to send your message. Please try again later.');
     }
 });
+
+
