@@ -4,10 +4,33 @@ export default {
 
         if (url.pathname === '/api/contact' && request.method === 'POST') {
             try {
-                const { name, message, turnstileToken } = await request.json();
-                console.log('Received:', { name, message, turnstileToken: turnstileToken?.slice(0, 20) });
+                const payload = await request.json();
+                const name = payload.name?.trim();
+                const email = payload.email?.trim();
+                const phone = payload.phone?.trim();
+                const guests = payload.guests?.toString().trim();
+                const date = payload.date?.trim();
+                const time = payload.time?.trim();
+                const specialRequest = payload.specialRequest?.trim();
+                const message = payload.message?.trim();
+                const turnstileToken = payload.turnstileToken;
 
-                if (!name || !message || !turnstileToken) {
+                const hasReservationDetails = Boolean(email || phone || guests || date || time || specialRequest);
+                const hasLegacyMessage = Boolean(message);
+
+                console.log('Received:', {
+                    name,
+                    email,
+                    phone,
+                    guests,
+                    date,
+                    time,
+                    specialRequest,
+                    message,
+                    turnstileToken: turnstileToken?.slice(0, 20),
+                });
+
+                if (!name || (!hasReservationDetails && !hasLegacyMessage) || !turnstileToken) {
                     console.log('Missing fields');
                     return new Response(JSON.stringify({ message: 'Missing fields.' }), { status: 400 });
                 }
@@ -27,6 +50,19 @@ export default {
                     return new Response(JSON.stringify({ message: 'Verification failed.' }), { status: 403 });
                 }
 
+                const emailText = [
+                    `Name: ${name}`,
+                    email ? `Email: ${email}` : '',
+                    phone ? `Phone: ${phone}` : '',
+                    guests ? `Guests: ${guests}` : '',
+                    date ? `Date: ${date}` : '',
+                    time ? `Time: ${time}` : '',
+                    specialRequest ? `Special request: ${specialRequest}` : '',
+                    message ? `Message: ${message}` : '',
+                ]
+                    .filter(Boolean)
+                    .join('\n');
+
                 const emailRes = await fetch('https://api.resend.com/emails', {
                     method: 'POST',
                     headers: {
@@ -36,8 +72,8 @@ export default {
                     body: JSON.stringify({
                         from: 'Cozy Cafe Website <onboarding@resend.dev>',
                         to: 'amit.k03377@gmail.com',
-                        subject: `New message from ${name}`,
-                        text: message,
+                        subject: hasReservationDetails ? `New reservation request from ${name}` : `New message from ${name}`,
+                        text: emailText,
                     }),
                 });
 
@@ -49,7 +85,7 @@ export default {
                     return new Response(JSON.stringify({ message: 'Failed to send.' }), { status: 500 });
                 }
 
-                return new Response(JSON.stringify({ message: 'Message sent successfully!' }), { status: 200 });
+                return new Response(JSON.stringify({ message: hasReservationDetails ? 'Reservation request received!' : 'Message sent successfully!' }), { status: 200 });
             } catch (err) {
                 console.log('Caught error:', err.message, err.stack);
                 return new Response(JSON.stringify({ message: 'Server error.' }), { status: 500 });
