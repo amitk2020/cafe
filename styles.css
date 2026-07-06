@@ -353,6 +353,30 @@ nav a:hover {
   font-weight: 700;
 }
 
+.form-status {
+  display: none;
+  padding: 0.9rem 1rem;
+  border-radius: 0.9rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.form-status.show {
+  display: block;
+}
+
+.form-status.success {
+  color: #215c3b;
+  background: #eaf7ee;
+  border-color: #b9e2c4;
+}
+
+.form-status.error {
+  color: #8b2e2e;
+  background: #fdecec;
+  border-color: #f1bebd;
+}
+
 .contact-form textarea {
   border-radius: 1rem;
 }

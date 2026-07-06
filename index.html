@@ -141,12 +141,32 @@
         </section>
         <section>
             <form id="contactForm" class="contact-form">
+                <div id="contactStatus" class="form-status" role="status" aria-live="polite"></div>
+
                 <label for="name">Name</label>
                 <input id="name" name="name" placeholder="Your name" required />
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Tell us what you'd like" required></textarea>
+
+                <label for="contactEmail">Email</label>
+                <input id="contactEmail" name="email" type="email" placeholder="Your email" required />
+
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" placeholder="Your phone number" required />
+
+                <label for="guests">Number of Guests</label>
+                <input id="guests" name="guests" type="number" min="1" max="20" placeholder="2" required />
+
+                <label for="date">Date</label>
+                <input id="date" name="date" type="date" required />
+
+                <label for="time">Time</label>
+                <input id="time" name="time" type="time" required />
+
+                <label for="specialRequest">Special Request</label>
+                <textarea id="specialRequest" name="specialRequest"
+                    placeholder="Tell us about any special requests"></textarea>
+
                 <div class="cf-turnstile" data-sitekey="0x4AAAAAADwe3abvzSChlPx-"></div>
-                <button type="submit">Send Message</button>
+                <button type="submit">Reserve Table</button>
             </form>
         </section>
 
@@ -164,6 +184,7 @@
                 </div>
                 <div class="contact-widgets">
                     <form id="newsletterForm" class="newsletter-form">
+                        <div id="newsletterStatus" class="form-status" role="status" aria-live="polite"></div>
                         <label for="email">Get updates & special offers</label>
                         <input id="email" type="email" placeholder="Your email address" required />
                         <button type="submit">Subscribe</button>
