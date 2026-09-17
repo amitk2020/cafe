@@ -72,8 +72,21 @@ export default {
                     body: JSON.stringify({
                         from: 'Cozy Cafe Website <onboarding@resend.dev>',
                         to: 'amit.k03377@gmail.com',
-                        subject: hasReservationDetails ? `New reservation request from ${name}` : `New message from ${name}`,
-                        text: emailText,
+                        reply_to: email,
+                        template: {
+                            id: env.RESEND_TEMPLATE_ID,
+                            variables: {
+                                name,
+                                email,
+                                phone,
+                                guests,
+                                date,
+                                time,
+                                specialRequest,
+                                message,
+                                emailText,
+                            },
+                        },
                     }),
                 });
 
