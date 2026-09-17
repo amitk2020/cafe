@@ -1,3 +1,15 @@
+const escapeHtml = (value = '') =>
+    String(value).replace(/[&<>"']/g, (character) => {
+        const entities = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;',
+        };
+        return entities[character];
+    });
+
 export default {
     async fetch(request, env) {
         const url = new URL(request.url);
@@ -63,6 +75,20 @@ export default {
                     .filter(Boolean)
                     .join('\n');
 
+                const emailHtml = `
+                    <div style="font-family:Arial,sans-serif;color:#2f241d;line-height:1.5">
+                        <h2 style="color:#76503c">New ${hasReservationDetails ? 'reservation request' : 'message'}</h2>
+                        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+                        ${email ? `<p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>` : ''}
+                        ${phone ? `<p><strong>Phone:</strong> ${escapeHtml(phone)}</p>` : ''}
+                        ${guests ? `<p><strong>Guests:</strong> ${escapeHtml(guests)}</p>` : ''}
+                        ${date ? `<p><strong>Date:</strong> ${escapeHtml(date)}</p>` : ''}
+                        ${time ? `<p><strong>Time:</strong> ${escapeHtml(time)}</p>` : ''}
+                        ${specialRequest ? `<p><strong>Special request:</strong> ${escapeHtml(specialRequest)}</p>` : ''}
+                        ${message ? `<p><strong>Message:</strong> ${escapeHtml(message)}</p>` : ''}
+                    </div>
+                `;
+
                 const emailRes = await fetch('https://api.resend.com/emails', {
                     method: 'POST',
                     headers: {
@@ -74,6 +100,7 @@ export default {
                         to: 'amit.k03377@gmail.com',
                         subject: hasReservationDetails ? `New reservation request from ${name}` : `New message from ${name}`,
                         text: emailText,
+                        html: emailHtml,
                     }),
                 });
 
