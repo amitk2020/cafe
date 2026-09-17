@@ -76,17 +76,53 @@ export default {
                     .join('\n');
 
                 const emailHtml = `
-                    <div style="font-family:Arial,sans-serif;color:#2f241d;line-height:1.5">
-                        <h2 style="color:#76503c">New ${hasReservationDetails ? 'reservation request' : 'message'}</h2>
-                        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-                        ${email ? `<p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>` : ''}
-                        ${phone ? `<p><strong>Phone:</strong> ${escapeHtml(phone)}</p>` : ''}
-                        ${guests ? `<p><strong>Guests:</strong> ${escapeHtml(guests)}</p>` : ''}
-                        ${date ? `<p><strong>Date:</strong> ${escapeHtml(date)}</p>` : ''}
-                        ${time ? `<p><strong>Time:</strong> ${escapeHtml(time)}</p>` : ''}
-                        ${specialRequest ? `<p><strong>Special request:</strong> ${escapeHtml(specialRequest)}</p>` : ''}
-                        ${message ? `<p><strong>Message:</strong> ${escapeHtml(message)}</p>` : ''}
-                    </div>
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>New Table Request</title>
+                    </head>
+                    <body style="margin:0;padding:0;background:#f5f0e7;color:#2f241d;font-family:Arial,sans-serif;">
+                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:#f5f0e7;padding:32px 16px;">
+                            <tr>
+                                <td align="center">
+                                    <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;max-width:600px;background:#fffdf9;">
+                                        <tr>
+                                            <td style="padding:32px 36px;background:#76503c;color:#fff7eb;">
+                                                <div style="font:700 30px Georgia,serif;">cozy</div>
+                                                <div style="margin-top:6px;color:#f4c866;font:600 10px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;">cafe</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:36px;">
+                                                <p style="margin:0 0 8px;color:#d96e3c;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">New table request</p>
+                                                <h1 style="margin:0 0 24px;font:600 32px Georgia,serif;">Someone's planning a good morning.</h1>
+                                                <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border-top:1px solid #e6d8c4;">
+                                                    <tr>
+                                                        <td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;color:#806f64;font-size:12px;font-weight:bold;text-transform:uppercase;">Name</td>
+                                                        <td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;font-size:15px;">${escapeHtml(name)}</td>
+                                                    </tr>
+                                                    ${email ? `<tr><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;color:#806f64;font-size:12px;font-weight:bold;text-transform:uppercase;">Email</td><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;font-size:15px;"><a href="mailto:${escapeHtml(email)}" style="color:#76503c;">${escapeHtml(email)}</a></td></tr>` : ''}
+                                                    ${phone ? `<tr><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;color:#806f64;font-size:12px;font-weight:bold;text-transform:uppercase;">Phone</td><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;font-size:15px;">${escapeHtml(phone)}</td></tr>` : ''}
+                                                    ${guests ? `<tr><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;color:#806f64;font-size:12px;font-weight:bold;text-transform:uppercase;">Guests</td><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;font-size:15px;">${escapeHtml(guests)}</td></tr>` : ''}
+                                                    ${date ? `<tr><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;color:#806f64;font-size:12px;font-weight:bold;text-transform:uppercase;">Date</td><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;font-size:15px;">${escapeHtml(date)}</td></tr>` : ''}
+                                                    ${time ? `<tr><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;color:#806f64;font-size:12px;font-weight:bold;text-transform:uppercase;">Time</td><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;font-size:15px;">${escapeHtml(time)}</td></tr>` : ''}
+                                                    ${specialRequest ? `<tr><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;color:#806f64;font-size:12px;font-weight:bold;text-transform:uppercase;">Request</td><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;font-size:15px;">${escapeHtml(specialRequest)}</td></tr>` : ''}
+                                                    ${message ? `<tr><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;color:#806f64;font-size:12px;font-weight:bold;text-transform:uppercase;">Message</td><td style="padding:12px 16px;border-bottom:1px solid #e6d8c4;font-size:15px;">${escapeHtml(message)}</td></tr>` : ''}
+                                                </table>
+                                                <p style="margin:28px 0 0;color:#806f64;font-size:13px;line-height:1.6;">Reply directly to ${escapeHtml(name)} to confirm the table booking.</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:20px 36px;background:#e7d9c6;color:#655148;font-size:12px;">Cozy Cafe - Good coffee. Great mornings.</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </body>
+                    </html>
                 `;
 
                 const emailRes = await fetch('https://api.resend.com/emails', {
