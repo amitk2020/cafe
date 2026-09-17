@@ -148,6 +148,48 @@ export default {
                     return new Response(JSON.stringify({ message: 'Failed to send.' }), { status: 500 });
                 }
 
+                if (email) {
+                    const confirmationHtml = `
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <body style="margin:0;padding:32px 16px;background:#f5f0e7;color:#2f241d;font-family:Arial,sans-serif;">
+                            <div style="max-width:600px;margin:0 auto;background:#fffdf9;">
+                                <div style="padding:32px 36px;background:#76503c;color:#fff7eb;">
+                                    <div style="font:700 30px Georgia,serif;">cozy</div>
+                                    <div style="margin-top:6px;color:#f4c866;font:600 10px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;">cafe</div>
+                                </div>
+                                <div style="padding:36px;line-height:1.6;">
+                                    <p style="margin:0 0 8px;color:#d96e3c;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">Request received</p>
+                                    <h1 style="margin:0 0 20px;font:600 32px Georgia,serif;">Thanks, ${escapeHtml(name)}.</h1>
+                                    <p>We received your table request and will be in touch soon to confirm the details.</p>
+                                    ${date && time ? `<p><strong>Requested for:</strong> ${escapeHtml(date)} at ${escapeHtml(time)}</p>` : ''}
+                                    ${guests ? `<p><strong>Guests:</strong> ${escapeHtml(guests)}</p>` : ''}
+                                </div>
+                            </div>
+                        </body>
+                        </html>
+                    `;
+
+                    const confirmationRes = await fetch('https://api.resend.com/emails', {
+                        method: 'POST',
+                        headers: {
+                            Authorization: `Bearer ${env.RESEND_API_KEY}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            from: 'Cozy Cafe Website <onboarding@resend.dev>',
+                            to: email,
+                            subject: 'We received your Cozy Cafe request',
+                            text: `Hi ${name},\n\nWe received your table request and will be in touch soon to confirm the details.`,
+                            html: confirmationHtml,
+                        }),
+                    });
+
+                    if (!confirmationRes.ok) {
+                        console.log('Confirmation email failed:', confirmationRes.status);
+                    }
+                }
+
                 return new Response(JSON.stringify({ message: hasReservationDetails ? 'Reservation request received!' : 'Message sent successfully!' }), { status: 200 });
             } catch (err) {
                 console.log('Caught error:', err.message, err.stack);
